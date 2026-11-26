@@ -442,7 +442,7 @@ var m='';[8,22,36,50,64,78,90].forEach(function(l,i){m+='<span class="mist" aria
 $('dfc').insertAdjacentHTML('beforeend',m);
 var h=new Date().getHours(),s=h<11?'Selamat pagi':h<15?'Selamat siang':h<18?'Selamat sore':'Selamat malam';
 $('v-dash').insertAdjacentHTML('beforebegin','<p class="hi">'+s+' 🌿 Tetap tenang, kami menjaga Anda. <span class="pill" id="pill"><i></i><b>Sensor tidak terhubung</b></span></p>');
-setInterval(function(){var ok=/unit 1 online, unit 2/.test($('dst').textContent),p=$('pill');p.classList.toggle('on',ok);p.querySelector('b').textContent=ok?'Sensor terhubung':'Sensor tidak terhubung'},1000);
+setInterval(function(){var ok=/unit 1 online/.test($('dst').textContent),p=$('pill');p.classList.toggle('on',ok);p.querySelector('b').textContent=ok?'Sensor terhubung':'Sensor tidak terhubung'},1000);
 })();
 </script>
 <script>
