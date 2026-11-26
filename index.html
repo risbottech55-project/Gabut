@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GABUT</title>
+<title>BAPER</title>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('sg-theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <style>
 :root{--navy:#14224a;--navy2:#1e2f63;--bg:#eef2fa;--card:#fff;--ink:#1b2440;--mute:#6b7690;--line:#e3e8f3;--ok:#22a06b;--mid:#f59e0b;--hi:#ef4444;--blue:#2563eb;--ind:#6c5ce7;--aroma:#8a74c2}
@@ -141,8 +141,6 @@ h1{line-height:36px;margin:0;position:relative;top:4px}
 .clock b{font-size:1.3rem;line-height:1.1}
 .clock span{font-size:.95rem;line-height:1.2}
 @media (max-width:760px){header{height:auto;min-height:36px}.clock b{font-size:1.05rem}.clock span{font-size:.78rem}}
-
-/* Warna polos */
 body{background:#111a33}
 .card{background:#fff;border-top:4px solid var(--ind)}
 #stc[data-lv="0"]{border-top-color:var(--ok)}
@@ -161,8 +159,6 @@ button.btn[aria-pressed=true]{background:var(--navy)}
 .brand i{background:#5b50d6}
 .link{color:#5b50d6}
 .bar{background:linear-gradient(90deg,#22a06b 0 30%,#f59e0b 30% 60%,#ef4444 60% 100%)}
-
-/* Hiasan */
 main{position:relative;z-index:1}
 nav button{transition:background .2s,transform .2s}
 nav button:hover{background:#f3f0ff;transform:translateX(3px)}
@@ -189,7 +185,6 @@ button.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(20,34,74,
 .g4 .card:nth-child(4),.grid .card:nth-child(4){animation-delay:.24s}
 #dfc.on{animation:rise .6s cubic-bezier(.2,.8,.2,1) .16s both,glow 1.8s ease-in-out .8s infinite}
 #stc[data-lv="2"]{animation:rise .6s cubic-bezier(.2,.8,.2,1) both,redglow 1.6s ease-in-out .8s infinite}
-
 .hi{margin:-6px 0 18px;color:#cfd8f0;font-size:.95rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pill{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:999px;background:#24305a;border:1px solid #3a4778;font-size:.8rem;color:#fff}
 .pill i{width:8px;height:8px;border-radius:50%;background:#f59e0b}
@@ -209,7 +204,6 @@ button.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(20,34,74,
 .link{transition:letter-spacing .2s}.link:hover{letter-spacing:.04em}
 ul.mini li{transition:background .2s,padding-left .2s;border-radius:8px}
 ul.mini li:hover{background:rgba(108,92,231,.08);padding-left:8px}
-
 .mood{display:inline-block;font-size:2.1rem;line-height:1;animation:bob 2.6s ease-in-out infinite;filter:drop-shadow(0 3px 5px rgba(0,0,0,.2))}
 @keyframes bob{50%{transform:translateY(-5px) rotate(-6deg)}}
 #bcc{border-top-color:#14b8a6;text-align:center}
@@ -223,8 +217,6 @@ ul.mini li:hover{background:rgba(108,92,231,.08);padding-left:8px}
 #sidetip b{display:block;margin-bottom:4px;color:#4b3fd0}
 #stp{display:block;transition:opacity .4s}
 body.col #sidetip{display:none}
-
-/* Meteor jatuh */
 .mt{position:fixed;height:2px;border-radius:2px;z-index:0;pointer-events:none;opacity:0;background:linear-gradient(270deg,#fff,rgba(165,243,252,.65) 28%,transparent);animation:mt linear infinite}
 .mt::before{content:"";position:absolute;right:-2px;top:-3px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(165,243,252,.85)}
 @keyframes mt{0%{opacity:0;transform:translate(0,0) rotate(35deg)}3%{opacity:1}22%{opacity:0;transform:translate(85vmax,59vmax) rotate(35deg)}100%{opacity:0;transform:translate(85vmax,59vmax) rotate(35deg)}}
@@ -232,13 +224,12 @@ body.col #sidetip{display:none}
 </style>
 </head>
 <body>
-<aside><div class="brand"><i></i><span class="bn">GABUT</span><button class="dots" id="mbtn" aria-label="Buka atau tutup menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></div><nav id="nav" aria-label="Menu utama"></nav></aside>
+<aside><div class="brand"><i></i><span class="bn">BAPER</span><button class="dots" id="mbtn" aria-label="Buka atau tutup menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></div><nav id="nav" aria-label="Menu utama"></nav></aside>
 <main>
 <header>
   <h1 id="ttl">Dashboard</h1>
   <div class="hr"><div class="clock"><b id="clk">--:--:--</b><span id="dte"></span></div></div>
 </header>
-
 <section class="v" id="v-dash">
  <div class="g4">
   <div class="card" id="stc">
@@ -269,7 +260,6 @@ body.col #sidetip{display:none}
    <div class="leg"><span><i style="background:var(--ok)"></i>Rendah</span><span><i style="background:var(--mid)"></i>Sedang</span><span><i style="background:var(--hi)"></i>Tinggi</span></div></div>
  </div>
 </section>
-
 <section class="v" id="v-rt" hidden>
  <div class="card">
   <div class="lbl">Konduktansi kulit (µS), 5 menit terakhir</div>
@@ -277,11 +267,9 @@ body.col #sidetip{display:none}
   <p class="note">Garis hijau putus-putus adalah baseline, garis merah adalah ambang aroma.</p>
  </div>
 </section>
-
 <section class="v" id="v-hist" hidden>
  <div class="card"><div class="lbl">Riwayat episode stres</div><ul class="ev" id="ev"><li><small>Belum ada episode stres.</small></li></ul></div>
 </section>
-
 <section class="v" id="v-rep" hidden>
  <div class="grid">
   <div class="card"><div class="lbl">Rata-rata stres</div><div class="big" id="rAvg">0%</div></div>
@@ -291,7 +279,6 @@ body.col #sidetip{display:none}
    <div class="kv"><div><span>Rendah</span><b id="tLo">0d</b></div><div><span>Sedang</span><b id="tMi">0d</b></div><div><span>Tinggi</span><b id="tHi">0d</b></div><div><span>Diffuser nyala</span><b id="tDf">0d</b></div></div></div>
  </div>
 </section>
-
 <section class="v" id="v-dev" hidden>
  <div class="card">
   <div class="lbl">Status koneksi</div>
@@ -299,7 +286,6 @@ body.col #sidetip{display:none}
   <div class="row" style="margin-top:12px"><button class="btn alt" id="bCal">Kalibrasi ulang</button></div>
  </div>
 </section>
-
 <section class="v" id="v-set" hidden>
  <div class="card">
   <div class="lbl">Pengaturan</div>
@@ -318,11 +304,10 @@ body.col #sidetip{display:none}
  </div>
 </section>
 </main>
-
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-var CFG={db:'https://gabut-63ab3-default-rtdb.asia-southeast1.firebasedatabase.app',kode:'gabutb1o9envo'};
+var CFG={db:'https://baper-40ccc-default-rtdb.asia-southeast1.firebasedatabase.app',kode:'baper40ccc'};
 var PAGES=[['dash','Dashboard','Dashboard','<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>'],
 ['rt','Real-time','Real-time','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
 ['hist','History','Riwayat','<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>'],
@@ -333,19 +318,13 @@ var S={base:null,calStart:Date.now(),calVals:[],sm:null,v:null,pct:0,ser:[],raw:
 var C={};
 function fmt(n,d){return n.toFixed(d).replace('.',',')}
 function dur(s){return s>=60?Math.floor(s/60)+'m '+(s%60)+'d':s+'d'}
-
-// nav
 var nav=$('nav'),cur='dash';
 PAGES.forEach(function(p){var b=document.createElement('button');b.innerHTML='<svg viewBox="0 0 24 24">'+p[3]+'</svg><span>'+p[1]+'</span>';b.onclick=function(){go(p[0])};b.dataset.p=p[0];nav.appendChild(b)});
 function go(id){cur=id;menu(false);PAGES.forEach(function(p){$('v-'+p[0]).hidden=p[0]!==id;if(p[0]===id)$('ttl').textContent=p[2]});
  [].forEach.call(nav.children,function(b){if(b.dataset.p===id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});draw()}
-
-// settings
 [['thr','o1'],['hold','o2'],['dur','o3'],['thrEnd','o6'],['endHold','o7'],['cal','o5']].forEach(function(p){var el=$(p[0]),o=$(p[1]);function u(){o.textContent=el.value;C[p[0]]=+el.value}el.addEventListener('input',u);u()});
-
 function clk(){var d=new Date();$('clk').textContent=d.toLocaleTimeString('id-ID',{hour12:false}).replace(/\./g,':');$('dte').textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 setInterval(clk,1000);clk();
-
 function cmd(s){try{if(S.src==='ws'&&S.url)fetch(S.url+'/cmd.json',{method:'PUT',body:JSON.stringify({c:s,id:Date.now()})}).catch(function(){})}catch(e){}}
 function manual(){var t=Date.now();if(S.src==='ws')cmd('AROMA:'+C.dur);else S.manualUntil=t+C.dur*1000;S.evs.unshift({t:t,peak:Math.round(S.pct),manual:true,end:t+C.dur*1000});renderEv()}
 $('bAr').onclick=manual;
@@ -354,7 +333,6 @@ function setStress(on,t){
  else if(!on&&S.stress){S.stress=false;if(S.ep){S.ep.end=t;S.ep=null}renderEv()}
  if(S.stress&&S.ep)S.ep.peak=Math.max(S.ep.peak,S.pct)}
 function setDiff(on,t){if(on&&!S.diff)S.diffSince=t;S.diff=!!on}
-
 var MAXON=15*60*1000;
 function lvl(p){return p<30?0:p<60?1:2}
 function tick(){
@@ -374,7 +352,6 @@ function tick(){
  render();
 }
 setInterval(tick,1000);
-
 function tm(t){return new Date(t).toLocaleTimeString('id-ID',{hour12:false}).replace(/\./g,':')}
 function renderEv(){
  var a=$('ev'),b=$('evd');
@@ -425,10 +402,8 @@ function draw(){
  if(cur==='rt'){var h=[];if(S.base){h=[{v:S.base,c:css('--ok')},{v:S.base*(1+C.thr/100),c:css('--hi')}]}line($('c2'),S.raw,{c:css('--blue'),h:h})}
 }
 window.addEventListener('resize',draw);
-
-// sources
 function connect(){
- var base=CFG.db.replace(/\/+$/,'')+'/gabut/'+CFG.kode,last=null;S.url=base;
+ var base=CFG.db.replace(/\/+$/,'')+'/baper/'+CFG.kode,last=null;S.url=base;
  function poll(){
   fetch(base+'/state.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
    if(j&&isFinite(+j.gsr)){
@@ -464,14 +439,11 @@ setInterval(function(){var ok=/unit 1 online/.test($('dst').textContent),p=$('pi
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-// kartu latihan napas
 $('dfc').insertAdjacentHTML('afterend','<div class="card" id="bcc"><div class="lbl">Latihan napas</div><div class="orbw"><div class="orb"></div><b id="bt">Tarik napas</b></div><small style="color:var(--mute)">4 detik tarik · 6 detik buang</small></div>');
 var t0=performance.now();
 setInterval(function(){var p=((performance.now()-t0)/1000)%10;$('bt').textContent=p<4?'Tarik napas':'Buang napas'},250);
-// wajah suasana
 var M={'MENUNGGU DATA':'💤','KALIBRASI…':'🔄','KONDISI TENANG':'😌','MULAI NAIK':'😐','TERDETEKSI STRES':'😟','STRES TINGGI':'😰'},lm='';
 setInterval(function(){var k=$('stxt').textContent;if(k!==lm){lm=k;$('ico').innerHTML='<span class="mood" aria-hidden="true">'+(M[k]||'💤')+'</span>'}},400);
-// tips di sidebar
 var T=['Minum air putih saat stres mulai naik.','Tarik napas 4 detik, buang 6 detik.','Regangkan bahu dan leher setiap jam.','Istirahatkan mata dari layar selama 20 detik.','Jalan santai 5 menit membantu menenangkan pikiran.'],ti=0;
 document.querySelector('aside').insertAdjacentHTML('beforeend','<div id="sidetip"><b>💡 Tips</b><span id="stp">'+T[0]+'</span></div>');
 setInterval(function(){var e=$('stp');e.style.opacity=0;setTimeout(function(){ti=(ti+1)%T.length;e.textContent=T[ti];e.style.opacity=1},400)},8000);
@@ -485,7 +457,6 @@ document.body.insertAdjacentHTML('beforeend',h);
 })();
 </script>
 <style>
-/* Hiasan hanya pada kotak kartu */
 .card{--aks:#5b50d6;--muda:#f4f3ff;border:2px solid var(--aks);box-shadow:6px 6px 0 var(--aks)}
 .card:hover{box-shadow:9px 9px 0 var(--aks)}
 #gsc{--aks:#2563eb;--muda:#eff5ff}
@@ -497,7 +468,6 @@ document.body.insertAdjacentHTML('beforeend',h);
 #stc[data-lv="1"]{--aks:#d97706;--muda:#fff8eb}
 #stc[data-lv="2"]{--aks:#dc2626;--muda:#fef0f0}
 .card,#stc,#stc[data-lv],#gsc,#dfc,#bcc{background:var(--muda);border-color:var(--aks)}
-/* pita judul */
 .card>.lbl:first-child{margin:-22px -22px 18px;padding:12px 16px;background:var(--aks);color:#fff;text-align:left}
 .card>.lbl:first-child::before{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:8px;border-radius:8px;background:#fff;vertical-align:middle}
 .g4,.g3,.grid{gap:20px}
@@ -506,7 +476,6 @@ document.body.insertAdjacentHTML('beforeend',h);
 .g4{padding-bottom:0}
 </style>
 <style>
-/* Presisi: satu grid, satu jarak (16px), tinggi sejajar */
 main{padding:14px 24px 32px}
 header,header.x{height:44px;min-height:44px;margin:0 0 8px;align-items:center;flex-wrap:nowrap}
 h1{line-height:44px;top:0}
@@ -558,7 +527,6 @@ body.col .brand .dots{top:18px;left:24px}
 }
 </style>
 <style>
-/* Tema: Gelap = tampilan asli. Terang = halaman terang + sidebar navy */
 html[data-theme=light] body{background:#eef2fa}
 html[data-theme=light] h1,html[data-theme=light] .clock b{color:var(--ink)}
 html[data-theme=light] .clock span,html[data-theme=light] .hi{color:var(--mute)}
