@@ -241,9 +241,9 @@ body.col #sidetip{display:none}
   </div>
   <div class="card" id="gsc">
    <div class="lbl">Konduktansi kulit (GSR)</div>
-   <div class="row between"><span class="big" id="gsr" style="color:var(--blue)">–</span>
+   <div class="row between"><span class="big" id="gsr" style="color:var(--blue)">0,00 µS</span>
     <svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"><path d="M8 32a12 12 0 0 1 24 0M13 32a7 7 0 0 1 14 0M18 32a2 2 0 0 1 4 0M20 5v8M11 9l3 6M29 9l-3 6"/></svg></div>
-   <div class="kv"><div><span>Baseline</span><b id="bas">–</b></div><div><span>Rasio</span><b id="rat">–</b></div></div>
+   <div class="kv"><div><span>Baseline</span><b id="bas">0,00</b></div><div><span>Rasio</span><b id="rat">0,00×</b></div></div>
   </div>
   <div class="card" id="dfc">
    <div class="lbl">Diffuser (Unit 2)</div>
@@ -314,7 +314,7 @@ var PAGES=[['dash','Dashboard','Dashboard','<rect x="3" y="3" width="7" height="
 ['rep','Reports','Laporan','<path d="M6 20v-6M12 20V6M18 20v-10"/>'],
 ['dev','Devices','Perangkat','<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/>'],
 ['set','Settings','Pengaturan','<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>']];
-var S={base:null,calStart:Date.now(),calVals:[],sm:null,v:null,pct:0,ser:[],raw:[],ts:[],lv:[],src:'ws',ws:null,over:null,under:null,stress:false,diff:false,diffSince:0,diffSec:0,n2:false,dev:null,manualUntil:0,ep:null,evs:[],epN:0,sum:0,n:0,max:0,t:[0,0,0]};
+var S={off:true,base:null,calStart:Date.now(),calVals:[],sm:null,v:null,pct:0,ser:[],raw:[],ts:[],lv:[],src:'ws',ws:null,over:null,under:null,stress:false,diff:false,diffSince:0,diffSec:0,n2:false,dev:null,devT:0,manualUntil:0,ep:null,evs:[],epN:0,sum:0,n:0,max:0,t:[0,0,0]};
 var C={};
 function fmt(n,d){return n.toFixed(d).replace('.',',')}
 function dur(s){return s>=60?Math.floor(s/60)+'m '+(s%60)+'d':s+'d'}
@@ -338,8 +338,11 @@ function lvl(p){return p<30?0:p<60?1:2}
 function tick(){
  var t=Date.now(),ready;
  if(S.src==='ws'){
-  var d=S.dev;if(d&&t-S.devT>6000){S.dev=null;d=null;$('dst').textContent='Status: unit 1 tidak mengirim data (offline).'}
-  if(!d){setStress(false,t);setDiff(false,t);render();return}
+  var d=S.dev;if(d&&t-S.devT>12000){S.dev=null;d=null}
+  if(!d||d.kontak===false){
+   S.off=true;S.v=null;S.sm=null;S.base=null;S.pct=0;S.n2=false;
+   setStress(false,t);setDiff(false,t);render();return}
+  S.off=false;
   S.v=+d.gsr;S.sm=S.v;S.n2=!!d.n2;S.base=d.cal?null:(+d.base||null);S.pct=+d.pct||0;ready=S.base!=null;
   if(ready){setStress(!!d.stress,t);setDiff(!!d.diff,t)}else{setStress(false,t);setDiff(false,t)}
  }
@@ -363,11 +366,13 @@ var LN=['RENDAH','SEDANG','TINGGI'],COL=['--ok','--mid','--hi'],TXT=['KONDISI TE
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function render(){
  var t=Date.now(),l=lvl(S.pct);if(S.stress&&l<1)l=1;
- if(S.base==null){$('stxt').textContent='KALIBRASI…';$('ico').style.color=css('--ind');$('rl').textContent='–';$('rl').style.color=''}
+ if(S.off){$('stxt').textContent='MENUNGGU DATA';$('ico').style.color=css('--ind');$('rl').textContent='–';$('rl').style.color=''}
+ else if(S.base==null){$('stxt').textContent='KALIBRASI…';$('ico').style.color=css('--ind');$('rl').textContent='–';$('rl').style.color=''}
  else{$('stxt').textContent=S.stress?(l>=2?'STRES TINGGI':'TERDETEKSI STRES'):(l===0?'KONDISI TENANG':'MULAI NAIK');$('ico').style.color=css(COL[l]);$('rl').textContent=LN[l];$('rl').style.color=css(COL[l])}
  $('mk').style.left=S.pct+'%';var rl=S.base==null?-1:l;$('stc').dataset.lv=rl<0?'':rl;$('rg').style.strokeDashoffset=213.6*(1-S.pct/100);$('rg').style.stroke=rl<0?css('--ind'):css(COL[l]);$('tip').textContent=['Menunggu data dari sensor…','Kondisi tenang. Pertahankan napas yang teratur.','Stres mulai naik. Tarik napas dalam: 4 detik tarik, 6 detik buang.','Stres tinggi. Berhenti sejenak, minum air, dan biarkan aroma bekerja.'][rl+1];$('dfc').classList.toggle('on',!!S.diff);$('pct').textContent=Math.round(S.pct)+'%';
- $('gsr').textContent=S.sm==null?'–':fmt(S.sm,2)+' µS';
- $('bas').textContent=S.base?fmt(S.base,2):'–';$('rat').textContent=S.base&&S.sm!=null?fmt(S.sm/S.base,2)+'×':'–';
+ $('gsr').textContent=S.off?'0,00 µS':S.sm==null?'–':fmt(S.sm,2)+' µS';
+ $('bas').textContent=S.off?'0,00':S.base?fmt(S.base,2):'–';
+ $('rat').textContent=S.off?'0,00×':S.base&&S.sm!=null?fmt(S.sm/S.base,2)+'×':'–';
  $('atxt').textContent=S.diff?'NYALA':'MATI';$('atxt').style.color=S.diff?css('--aroma'):'';
  $('abar').style.width=(S.diff?100:0)+'%';
  $('asub').textContent=S.diff?'Menyala selama '+dur(Math.round((t-S.diffSince)/1000)):S.src==='ws'?(S.n2?'Unit 2 siap, menunggu stres':'Unit 2 belum terhubung'):'Menunggu stres (simulasi)';
@@ -403,12 +408,16 @@ function draw(){
 }
 window.addEventListener('resize',draw);
 function connect(){
- var base=CFG.db.replace(/\/+$/,'')+'/baper/'+CFG.kode,last=null;S.url=base;
+ var base=CFG.db.replace(/\/+$/,'')+'/baper/'+CFG.kode,last=null,first=true;S.url=base;
  function poll(){
   fetch(base+'/state.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
    if(j&&isFinite(+j.gsr)){
-    if(j.seq!==last){last=j.seq;S.dev=j;S.devT=Date.now()}
-    if(S.dev&&Date.now()-S.devT<6000)$('dst').textContent='Status: unit 1 online, unit 2 '+(S.dev.n2?'online':'offline')+'.'
+    var k=j.boot+':'+j.seq;
+    if(first){first=false;last=k}
+    else if(k!==last){last=k;S.dev=j;S.devT=Date.now()}
+    if(S.dev&&Date.now()-S.devT<12000)
+     $('dst').textContent=S.dev.kontak===false?'Status: unit 1 online, elektroda belum menempel.':'Status: unit 1 online, unit 2 '+(S.dev.n2?'online':'offline')+'.';
+    else $('dst').textContent='Status: unit 1 tidak mengirim data (offline).'
    }else $('dst').textContent='Status: tersambung ke database, menunggu unit 1.'
   }).catch(function(){$('dst').textContent='Status: gagal tersambung ke database. Periksa alamat dan aturan database.'})
  }
@@ -432,8 +441,8 @@ $('gsc').insertAdjacentHTML('beforeend','<svg class="wave" viewBox="0 0 800 40" 
 var m='';[8,22,36,50,64,78,90].forEach(function(l,i){m+='<span class="mist" aria-hidden="true" style="left:'+l+'%;animation-delay:'+(i*.45)+'s"></span>'});
 $('dfc').insertAdjacentHTML('beforeend',m);
 var h=new Date().getHours(),s=h<11?'Selamat pagi':h<15?'Selamat siang':h<18?'Selamat sore':'Selamat malam';
-$('v-dash').insertAdjacentHTML('beforebegin','<p class="hi">'+s+' 🌿 Tetap tenang, kami menjaga Anda. <span class="pill" id="pill"><i></i><b>Menunggu sensor</b></span></p>');
-setInterval(function(){var ok=/unit 1 online/.test($('dst').textContent),p=$('pill');p.classList.toggle('on',ok);p.querySelector('b').textContent=ok?'Sensor terhubung':'Menunggu sensor'},1000);
+$('v-dash').insertAdjacentHTML('beforebegin','<p class="hi">'+s+' 🌿 Tetap tenang, kami menjaga Anda. <span class="pill" id="pill"><i></i><b>Sensor tidak terhubung</b></span></p>');
+setInterval(function(){var ok=/unit 1 online, unit 2/.test($('dst').textContent),p=$('pill');p.classList.toggle('on',ok);p.querySelector('b').textContent=ok?'Sensor terhubung':'Sensor tidak terhubung'},1000);
 })();
 </script>
 <script>
